@@ -45,3 +45,13 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
 pub fn compile_str_optimized(source_code: &str) -> String {
     String::new()
 }
+
+pub fn lex_str_to_string(source_code: &str) -> String {
+    let mut output_string: String = String::new();
+
+    for lexem in lexer::lex_str(source_code) {
+        output_string.push_str(format!("{:?}\n", lexem).as_str());
+    }
+
+    output_string
+}
