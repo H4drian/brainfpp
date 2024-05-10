@@ -35,3 +35,4 @@ Usage: <compiler_job>:
         -d -dev    : unoptimized
         -r -release: optimized
     run: <brainfuck_file>
+    lex: <source_file> <out_file?>
