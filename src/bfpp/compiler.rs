@@ -41,9 +41,8 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
     output_string
 }
 
-// TODO: optimized compiler
 pub fn compile_str_optimized(source_code: &str) -> String {
-    String::new()
+    String::new() 
 }
 
 pub fn lex_str_to_string(source_code: &str) -> String {
