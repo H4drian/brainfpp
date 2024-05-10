@@ -1,0 +1,10 @@
+sdp 0
+add 104
+out
+add 1
+out
+[
+    sub 1
+]
+add 10
+out 
