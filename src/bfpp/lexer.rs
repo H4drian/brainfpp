@@ -1,5 +1,3 @@
-use crate::bfpp;
-
 #[derive(Debug)]
 pub enum Token {
     Sdp,        // set data pointer

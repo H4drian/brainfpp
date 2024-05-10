@@ -2,7 +2,7 @@ use crate::bfpp::lexer;
 use lexer::Token;
 use lexer::Lexem;
 
-pub fn compile_str(source_code: &str) -> String {
+pub fn compile_str_unoptimized(source_code: &str) -> String {
     let mut output_string: String = String::new();
     let lexems: Vec<Lexem> = lexer::lex_str(source_code);
     let mut data_ptr: usize = 0;
@@ -39,4 +39,9 @@ pub fn compile_str(source_code: &str) -> String {
     }
 
     output_string
+}
+
+// TODO: optimized compiler
+pub fn compile_str_optimized(source_code: &str) -> String {
+    String::new()
 }
