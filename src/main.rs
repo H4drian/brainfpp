@@ -11,7 +11,7 @@ fn main() {
         "compile" => {
             let source_file: Option<String> = env::args().nth(2);
             let out_file: Option<String> = env::args().nth(3);
-            let flag: Option<String> = env::args().nth(4);
+            let flag_arg: Option<String> = env::args().nth(4);
 
             if source_file.is_none() {
                 panic!("Brainfpp: No source file given.");
@@ -22,11 +22,23 @@ fn main() {
                 Err(_) => panic!("Brainfpp: Error reading source file.")
             };
 
-            let compiled_code = match flag.as_deref() {
-                Some("-r") | Some("-release") => bfpp::compiler::compile_str_optimized(&source_code),
-                Some("-d") | Some("-dev") => bfpp::compiler::compile_str_unoptimized(&source_code),
+            let compiled_code = match flag_arg.as_deref() {
+                Some(arg) if arg.starts_with('-') => {
+                    match arg {
+                        "-r" | "-release" => bfpp::compiler::compile_str_optimized(&source_code),
+                        "-d" | "-dev" => bfpp::compiler::compile_str_unoptimized(&source_code),
+                        _ => bfpp::compiler::compile_str_unoptimized(&source_code)
+                    }
+                }
                 _ => bfpp::compiler::compile_str_unoptimized(&source_code)
             };
+
+            if let Some(flag) = flag_arg {
+                if flag.starts_with('-') {
+                    println!("{}", compiled_code);
+                    return;
+                }
+            }
 
             if out_file.is_none() {
                 println!("{}", compiled_code);
