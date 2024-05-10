@@ -1,7 +1,7 @@
 // bfpp built-in brainfuck interpreter
 
 pub fn interpret_str(code: &str) -> () { 
-    let mut code_chars: Vec<char> = code.chars().collect();
+    let code_chars: Vec<char> = code.chars().collect();
 
     let mut tape: Vec<u8> = vec![0; 30000];
     let mut data_ptr: usize = 0;

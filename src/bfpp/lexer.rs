@@ -1,5 +1,7 @@
+use crate::bfpp;
+
 #[derive(Debug)]
-enum Token {
+pub enum Token {
     Sdp,        // set data pointer
     Add,        // add data
     Sub,        // sub from data
@@ -12,9 +14,9 @@ enum Token {
 
 #[derive(Debug)]
 pub struct Lexem {
-    token: Token,
-    arg: Option<usize>,
-    line: usize
+    pub token: Token,
+    pub arg: Option<usize>,
+    pub line: usize
 }
 
 pub fn lex_str(source_code: &str) -> Vec<Lexem> {
