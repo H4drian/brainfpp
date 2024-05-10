@@ -28,11 +28,3 @@ out                 output cell 0
 add 10              add 10 to cell 0 (newline char)
 out                 output 
 ```
-
-## Command Usage
-Usage: <compiler_job>:
-    compile: <source_file> <out_file?> <compiler_mode>:
-        -d -dev    : unoptimized
-        -r -release: optimized
-    run: <brainfuck_file>
-    lex: <source_file> <out_file?>

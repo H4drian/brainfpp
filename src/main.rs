@@ -102,6 +102,16 @@ fn main() {
             }
         }
 
+        "help" => {
+            println!("Usage: <compiler_job>:");
+            println!("help");
+            println!("compile: <source_file> <out_file?> <compiler_mode>:");
+            println!("  -d -dev    : unoptimized");
+            println!("  -r -release: optimized");
+            println!("run: <brainfuck_file>");
+            println!("lex: <source_file> <out_file?>");
+        }  
+
         _ => panic!("Brainfpp: No command arguments given.")
     }
 }
