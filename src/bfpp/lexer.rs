@@ -3,6 +3,7 @@ pub enum Token {
     Sdp,        // set data pointer
     Adp,        // add data pointer
     Sbp,        // sub pointer
+    Ldc,        // load cell
     Add,        // add data
     Sub,        // sub from data
     Out,        // output 
@@ -32,6 +33,7 @@ pub fn lex_str(source_code: &str) -> Vec<Lexem> {
             "sdp" => Token::Sdp,
             "adp" => Token::Adp,
             "sbp" => Token::Sbp,
+            "ldc" => Token::Ldc,
             "add" => Token::Add,
             "sub" => Token::Sub,
             "out" => Token::Out,

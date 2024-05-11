@@ -9,6 +9,7 @@ Code is very simple. Each instruction is separated by a new line and follows an 
 - `sdp <addr>`: Set data pointer
 - `adp <val>`: Add to data pointer
 - `sbp <val>`: Subtract from pointer
+- `ldc <val>`: Load value into current cell
 - `add <val>`: Add value
 - `sub <val>`: Subtract value
 - `out`: Output current value
