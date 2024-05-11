@@ -5,44 +5,54 @@ pub fn optimize_bf(bf_code: &str) -> String {
     for chain in chaincode {
         match chain.chars().nth(0).unwrap() {
             '+' => {
-                let mut temp_string: String = String::new();
-                let chain_is_prime: bool = is_prime(chain.len());
-                let (factor1, factor2): (usize, usize);
+                if chain.len() > 9 {
+                    let mut temp_string: String = String::new();
+                    let chain_is_prime: bool = is_prime(chain.len());
+                    let (factor1, factor2): (usize, usize);
 
-                if chain_is_prime { 
-                    (factor1, factor2) = smallest_factor_pair(chain.len() - 1)
+                    if chain_is_prime { 
+                        (factor1, factor2) = smallest_factor_pair(chain.len() - 1)
+                    } else {
+                        (factor1, factor2) = smallest_factor_pair(chain.len())
+                    }
+
+                    temp_string.push('>');
+
+                    for _ in 0..factor1 { temp_string.push('+') }
+                    temp_string.push_str("[<");
+                    for _ in 0..factor2 { temp_string.push('+') }
+                    temp_string.push_str(">-]<");
+                    if chain_is_prime { temp_string.push('+')}
+
+                    output_string.push_str(&temp_string);
                 } else {
-                    (factor1, factor2) = smallest_factor_pair(chain.len())
+                    output_string.push_str(chain);
                 }
-
-                temp_string.push('>');
-
-                for _ in 0..factor1 { temp_string.push('+') }
-                temp_string.push_str("[<");
-                for _ in 0..factor2 { temp_string.push('+') }
-                temp_string.push_str(">-]<");
-                if chain_is_prime { temp_string.push('+')}
-
-                output_string.push_str(&temp_string);
             }
             '-' => {
-                let mut temp_string: String = String::new();
-                let chain_is_prime: bool = is_prime(chain.len());
-                let (factor1, factor2): (usize, usize);
+                if chain.len() > 9 {
+                    let mut temp_string: String = String::new();
+                    let chain_is_prime: bool = is_prime(chain.len());
+                    let (factor1, factor2): (usize, usize);
 
-                if chain_is_prime { 
-                    (factor1, factor2) = smallest_factor_pair(chain.len() - 1)
+                    if chain_is_prime { 
+                        (factor1, factor2) = smallest_factor_pair(chain.len() - 1)
+                    } else {
+                        (factor1, factor2) = smallest_factor_pair(chain.len())
+                    }
+
+                    temp_string.push('>');
+
+                    for _ in 0..factor1 { temp_string.push('+') }
+                    temp_string.push_str("[<");
+                    for _ in 0..factor2 { temp_string.push('-') }
+                    temp_string.push_str(">-]<");
+                    if chain_is_prime { temp_string.push('+') }
+
+                    output_string.push_str(&temp_string);
                 } else {
-                    (factor1, factor2) = smallest_factor_pair(chain.len())
+                    output_string.push_str(chain);
                 }
-
-                temp_string.push('>');
-
-                for _ in 0..factor1 { temp_string.push('+') }
-                temp_string.push_str("[<");
-                for _ in 0..factor2 { temp_string.push('-') }
-                temp_string.push_str(">-]<");
-                if chain_is_prime { temp_string.push('+') }
             }
                 _  => {
                 output_string.push_str(chain);

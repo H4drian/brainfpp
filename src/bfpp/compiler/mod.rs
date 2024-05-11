@@ -3,6 +3,7 @@ use lexer::Token;
 use lexer::Lexem;
 
 mod optimizer;
+use optimizer::optimize_bf;
 
 pub fn compile_str_unoptimized(source_code: &str) -> String {
     let mut output_string: String = String::new();
@@ -44,7 +45,7 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
 }
 
 pub fn compile_str_optimized(source_code: &str) -> String {
-    optimizer::optimize_bf(&compile_str_unoptimized(source_code))
+    optimize_bf(&compile_str_unoptimized(source_code))
 }
 
 pub fn lex_str_to_string(source_code: &str) -> String {
