@@ -1,6 +1,8 @@
 #[derive(Debug)]
 pub enum Token {
     Sdp,        // set data pointer
+    Adp,        // add data pointer
+    Sbp,        // sub pointer
     Add,        // add data
     Sub,        // sub from data
     Out,        // output 
@@ -28,6 +30,8 @@ pub fn lex_str(source_code: &str) -> Vec<Lexem> {
 
         let instruction: Token = match line.split_whitespace().next().unwrap_or("").to_lowercase().as_str() {
             "sdp" => Token::Sdp,
+            "adp" => Token::Adp,
+            "sbp" => Token::Sbp,
             "add" => Token::Add,
             "sub" => Token::Sub,
             "out" => Token::Out,

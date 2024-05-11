@@ -31,6 +31,8 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
                     data_ptr -= offset as usize;
                 } else {}
             }
+            Token::Adp => output_string.push_str(&">".repeat(arg.unwrap())),
+            Token::Sbp => output_string.push_str(&"<".repeat(arg.unwrap())),
             Token::Add => output_string.push_str(&"+".repeat(arg.unwrap())),
             Token::Sub => output_string.push_str(&"-".repeat(arg.unwrap())),
             Token::Out => output_string.push_str(&"."),

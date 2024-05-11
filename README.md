@@ -7,6 +7,8 @@ An assembly language that compiles to Brainfuck Turing machine code.
 Code is very simple. Each instruction is separated by a new line and follows an `<instruction><arg>` format. There are 7 instructions:
 
 - `sdp <addr>`: Set data pointer
+- `adp <val>`: Add to data pointer
+- `sbp <val>`: Subtract from pointer
 - `add <val>`: Add value
 - `sub <val>`: Subtract value
 - `out`: Output current value
