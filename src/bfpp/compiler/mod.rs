@@ -44,6 +44,10 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
             Token::Slp => output_string.push_str(&"["),
             Token::Elp => output_string.push_str(&"]"),
             Token::Noop => {}
+            // subroutines should be delt with by the lexer
+            Token::Def => {}
+            Token::Edef => {}
+            Token::Call => {}
         }
     }
 
