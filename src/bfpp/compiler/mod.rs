@@ -34,7 +34,7 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
             Token::Adp => output_string.push_str(&">".repeat(arg.unwrap())),
             Token::Sbp => output_string.push_str(&"<".repeat(arg.unwrap())),
             Token::Ldc => {
-                output_string.push_str(&"[-]");
+                if output_string.len() > 0 { output_string.push_str(&"[-]"); }
                 output_string.push_str(&"+".repeat(arg.unwrap()));
             }
             Token::Add => output_string.push_str(&"+".repeat(arg.unwrap())),
