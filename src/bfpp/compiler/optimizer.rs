@@ -1,3 +1,12 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2024 Leon Cotten
+ * 
+ * This language is provided under the MIT Licence.
+ * See LICENSE for more information.
+ */ 
+
 pub fn optimize_bf(bf_code: &str) -> String {
     let mut output_string: String = String::new();
     let chaincode: Vec<&str> = chain_chars(bf_code);
