@@ -9,4 +9,5 @@
 
 pub mod interpreter;
 pub mod compiler;
+pub mod cli;
 mod lexer;
