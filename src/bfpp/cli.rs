@@ -10,7 +10,6 @@
 extern crate clap;
 use clap::{App, Arg, ArgMatches, SubCommand};
 
-// make this be different for stable and dev branches of the compiler
 const VERSION: &str = "indev";
 
 pub fn get_matches() -> ArgMatches {
