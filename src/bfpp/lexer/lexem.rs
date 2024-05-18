@@ -55,6 +55,6 @@ pub struct Lexem {
 }
 
 pub struct Subroutine {
-    name: String,
-    code: Vec<Lexem>
+    pub name: String,
+    pub code: Vec<Lexem>
 }

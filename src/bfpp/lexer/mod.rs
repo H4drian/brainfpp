@@ -7,7 +7,7 @@
  * See LICENSE for more information.
  */ 
 
-mod lexem;
+pub mod lexem;
 use lexem::*;
 
 pub fn lex_str(source_code: &str) -> Vec<Lexem> {

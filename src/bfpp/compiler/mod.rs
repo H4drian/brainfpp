@@ -8,8 +8,10 @@
  */ 
 
 use crate::bfpp::lexer;
-use lexer::Token;
-use lexer::Lexem;
+use lexer::lexem::{
+    Token,
+    Lexem
+};
 
 mod optimizer;
 use optimizer::optimize_bf;

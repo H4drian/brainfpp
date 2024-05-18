@@ -7,6 +7,5 @@
  * See LICENSE for more information.
  */
 
+mod print;
 mod err;
-
-fn debug_print(error: err::BfppError) {}
