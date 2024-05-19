@@ -16,7 +16,7 @@ fn get_spaces(x: usize) -> String {
 fn error_print(error: err::BfppError) {
     println!("error: {} [{}]", error.message, error.errcode);
     println!("{}|", get_spaces(error.line));
-    println!("{}|") 
+    println!("{}|", error.line);
 }
 
 fn warning_print(warning: err::BfppWarning) {}

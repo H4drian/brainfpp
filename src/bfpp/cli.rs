@@ -21,6 +21,13 @@ pub fn get_matches() -> ArgMatches {
             SubCommand::with_name("compile")
                 .about("compiles a brainfpp program to brainf")
                 .arg(
+                    Arg::with_name("infile")
+                        .value_name("INFILE")
+                        .help("input file to compile")
+                        .required(true)
+                        .index(1)
+                )
+                .arg(
                     Arg::new("outfile")
                         .short('o')
                         .long("outfile")
@@ -37,8 +44,8 @@ pub fn get_matches() -> ArgMatches {
                 )
                 .arg(
                     Arg::new("dev")
-                        .short('r')
-                        .long("release")
+                        .short('d')
+                        .long("dev")
                         .takes_value(false)
                         .help("builds the program in dev mode (unoptimized)")
                 )
@@ -46,10 +53,24 @@ pub fn get_matches() -> ArgMatches {
         .subcommand(
             SubCommand::with_name("interpret")
                 .about("interprets a brainf program")
+                .arg(
+                    Arg::with_name("infile")
+                        .value_name("INFILE")
+                        .help("input file to compile")
+                        .required(true)
+                        .index(1)
+                )
         )
         .subcommand(
             SubCommand::with_name("lex")
                 .about("returns the lexems of a brainfpp program")
+                .arg(
+                    Arg::with_name("infile")
+                        .value_name("INFILE")
+                        .help("input file to compile")
+                        .required(true)
+                        .index(1)
+                )
                 .arg(
                     Arg::new("outfile")
                         .short('o')
