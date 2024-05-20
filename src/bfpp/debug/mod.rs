@@ -9,3 +9,14 @@
 
 mod print;
 mod err;
+mod token;
+
+use token::DebugToken;
+
+pub fn get_debug_token(source_code: String) -> Vec<DebugToken> {
+    let mut tokens: Vec<DebugToken> = Vec::new();
+
+    
+
+    tokens
+}
