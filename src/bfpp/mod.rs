@@ -10,4 +10,5 @@
 pub mod interpreter;
 pub mod compiler;
 pub mod cli;
+pub mod debug;
 mod lexer;

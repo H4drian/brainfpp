@@ -7,8 +7,18 @@
  * See LICENSE for more information.
  */ 
 
-mod lexem;
+pub mod lexem;
 use lexem::*;
+
+trait StartsWith {
+    fn starts_with(&self, other: &str) -> bool;
+}
+
+impl StartsWith for String {
+    fn starts_with(&self, other: &str) -> bool {
+        self.as_str().starts_with(other)
+    }
+}
 
 pub fn lex_str(source_code: &str) -> Vec<Lexem> {
     let mut lexem_vec: Vec<Lexem> = Vec::new();
@@ -16,12 +26,30 @@ pub fn lex_str(source_code: &str) -> Vec<Lexem> {
     let mut in_subroutine_definition = false;
     let mut current_subroutine_name = String::new();
     let mut current_subroutine_code: Vec<Lexem> = Vec::new();
-
+    let mut in_multiline_comment: bool = false;
+    
     let lines: Vec<&str> = source_code.lines().collect();
     let mut line_count: usize = 0;
 
     for line in lines {
         line_count += 1;
+
+        if in_multiline_comment {
+            if line.starts_with("-#") {
+                in_multiline_comment = false;
+                continue;
+            }
+            continue;
+        }
+        
+        if line.starts_with("#") {
+            continue;
+        }
+
+        if line.starts_with("#-") {
+            in_multiline_comment = true;
+            continue;
+        }
 
         let instruction: Token = match line.split_whitespace().next().unwrap_or("").to_lowercase().as_str() {
             "sdp" => Token::Sdp,
