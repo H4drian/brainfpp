@@ -7,7 +7,7 @@
  * See LICENSE for more information.
  */
 
-mod print;
+pub mod print;
 mod err;
 mod token;
 
@@ -118,7 +118,7 @@ pub fn debug_source_code(source_code: String, start: usize, end: usize, filepath
             });
         }
 
-        if dtoken.token.takes_arg() {
+        if dtoken.token.clone().takes_arg() {
             if dtoken.arg.is_none() {
                 errors.push(BfppError {
                     message: "argument taking instruction has no argument".to_string(),
@@ -128,7 +128,7 @@ pub fn debug_source_code(source_code: String, start: usize, end: usize, filepath
                 });
             }
 
-            if dtoken.token.alters_data() {
+            if dtoken.token.clone().alters_data() {
                 if dtoken.arg.unwrap_or(0) > 255 {
                     errors.push(BfppError {
                         message: "argument is larger than the max for unsigned 8 bit values and will likely cause problems when running the resulting bf program. Try a smaller value".to_string(),
@@ -139,7 +139,7 @@ pub fn debug_source_code(source_code: String, start: usize, end: usize, filepath
                 }
             }
 
-            if dtoken.token.alters_pointer() {
+            if dtoken.token.clone().alters_pointer() {
                 if dtoken.arg.unwrap_or(0) > 30000 {
                     warnings.push(BfppWarning {
                         message: "argument is larger than the initial cell count of 30,000. This could cause errors depending on if the bf interpreter automatically resizes the data tape.".to_string(),
