@@ -17,7 +17,10 @@ Code is very simple. Each instruction is separated by a new line and follows an 
 - `[]`: Loop
 - `def/edef`: Define subroutine
 - `call`: Call subroutine
-- Comments can be anything as long as they are not any of the above keywords at the start of a line 
+- `#`: Starts a single line comment. This can be at the start of a line or end but
+never between an instruction and arg.
+- `#- -#`: Starts and ends a multi line comment. Everything between these will be
+ignored.
 
 An example of a brainfpp program that says hi\n would go as follows
 
