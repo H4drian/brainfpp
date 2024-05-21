@@ -37,6 +37,7 @@ fn error_print(error: err::BfppError) {
     println!("{}|", get_spaces(error.line));
     println!("{}|{}", error.line, read_file_line(error.file, error.line));
     println!("{}|", get_spaces(error.line));
+    println!("")
 }
 
 fn warning_print(warning: err::BfppWarning) {
@@ -44,6 +45,7 @@ fn warning_print(warning: err::BfppWarning) {
     println!("{}|", get_spaces(warning.line));
     println!("{}|{}", warning.line, read_file_line(warning.file, warning.line));
     println!("{}|", get_spaces(warning.line));
+    println!("")
 }
 
 pub fn print_all((errors, warnings): (Vec<err::BfppError>, Vec<err::BfppWarning>)) {

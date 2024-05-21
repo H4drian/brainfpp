@@ -20,6 +20,16 @@ impl StartsWith for String {
     }
 }
 
+trait IsWhitespace {
+    fn is_whitespace(&self) -> bool;
+}
+
+impl IsWhitespace for String {
+    fn is_whitespace(&self) -> bool {
+        self.chars().all(|c| c.is_whitespace())
+    }
+}
+
 pub fn lex_str(source_code: &str) -> Vec<Lexem> {
     let mut lexem_vec: Vec<Lexem> = Vec::new();
     let mut subroutine_vec: Vec<Subroutine> = Vec::new();
@@ -32,6 +42,10 @@ pub fn lex_str(source_code: &str) -> Vec<Lexem> {
     let mut line_count: usize = 0;
 
     for line in lines {
+        if line.to_string().is_whitespace() {
+            continue;
+        }
+            
         line_count += 1;
 
         if in_multiline_comment {
