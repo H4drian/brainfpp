@@ -105,7 +105,7 @@ fn main() {
             }
         }
         Some(("debug", debug_m)) => {
-            // finish when debuger is implemented
+            // implement when debuger is complete
         }
         None => {}
         _ => {}

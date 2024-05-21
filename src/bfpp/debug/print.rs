@@ -45,3 +45,12 @@ fn warning_print(warning: err::BfppWarning) {
     println!("{}|{}", warning.line, read_file_line(warning.file, warning.line));
     println!("{}|", get_spaces(warning.line));
 }
+
+pub fn print_all((errors, warnings): (Vec<err::BfppError>, Vec<err::BfppWarning>)) {
+    for error in errors {
+        error_print(error);
+    }
+    for warning in warnings {
+        warning_print(warning);
+    }
+}
