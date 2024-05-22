@@ -63,26 +63,5 @@ pub fn get_matches() -> ArgMatches {
                 .arg(infile_arg.clone())
                 .arg(outfile_arg.clone())
         )
-        .subcommand(
-            SubCommand::with_name("debug")
-                .about("debugging tool for brainfpp. by default it will debug the entire program")
-                .arg(infile_arg)
-                .arg(
-                    Arg::new("start")
-                        .short('s')
-                        .long("start")
-                        .value_name("START")
-                        .takes_value(true)
-                        .help("the line to start debugging at")
-                )
-                .arg(
-                    Arg::new("end")
-                        .short('e')
-                        .long("end")
-                        .value_name("END")
-                        .takes_value(true)
-                        .help("the line to end debugging at")
-                )
-        )
     .get_matches()
 }

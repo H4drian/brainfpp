@@ -106,24 +106,6 @@ fn main() {
                 }
             }
         }
-        Some(("debug", debug_m)) => {
-            return;        // remove this line when debugging works
-            if let Some(infile) = debug_m.value_of("infile") {
-                let infile_content: String = read_input_file(infile.to_string());
-
-                if let Some(start) = debug_m.value_of("start") {
-                    let start_num: usize = start.parse().unwrap();
-                    if let Some(end) = debug_m.value_of("end") {
-                        let end_num: usize = end.parse().unwrap();
-                        print_all(debug::debug_source_code(infile_content.clone(), start_num, end_num, infile.to_string()));
-                    }
-
-                    print_all(debug::debug_source_code(infile_content.clone(), start_num, infile_content.len(), infile.to_string()));
-                }
-
-                print_all(debug::debug_source_code(infile_content.clone(), 1, infile_content.len(), infile.to_string()));
-            }
-        }
         None => {}
         _ => {}
     }

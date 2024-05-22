@@ -49,7 +49,12 @@ impl PartialEq for Token {
 
 impl Token {
     pub fn takes_arg(self) -> bool {
-       !(self == Token::Slp || self == Token::Elp || self == Token::Edef || self == Token::Noop) 
+       !(  self == Token::Slp 
+        || self == Token::Elp 
+        || self == Token::Edef
+        || self == Token::Out
+        || self == Token::Inn
+        || self == Token::Noop) 
     }
 
     pub fn alters_pointer(self) -> bool {
