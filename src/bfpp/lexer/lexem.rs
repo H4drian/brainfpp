@@ -59,6 +59,7 @@ pub struct Subroutine {
     pub code: Vec<Lexem>
 }
 
+#[allow(dead_code)]
 pub trait New {
     fn new() -> Self;
 }
