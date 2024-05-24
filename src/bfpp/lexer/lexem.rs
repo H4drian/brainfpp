@@ -47,20 +47,6 @@ impl PartialEq for Token {
     }
 }
 
-impl Token {
-    pub fn takes_arg(self) -> bool {
-       !(self == Token::Slp || self == Token::Elp || self == Token::Edef || self == Token::Noop) 
-    }
-
-    pub fn alters_pointer(self) -> bool {
-        self == Token::Sdp || self == Token::Adp || self == Token::Sbp
-    }
-
-    pub fn alters_data(self) -> bool {
-        self == Token::Ldc || self == Token::Add || self == Token::Sub
-    }
-}
-
 #[derive(Debug, Clone)]
 pub struct Lexem {
     pub token: Token,

@@ -16,9 +16,9 @@ use lexer::lexem::{
 mod optimizer;
 use optimizer::optimize_bf;
 
-pub fn compile_str_unoptimized(source_code: &str) -> String {
+pub fn compile_str_unoptimized(source_code: &str, linked_libs: Vec<&str>) -> String {
     let mut output_string: String = String::new();
-    let lexems: Vec<Lexem> = lexer::lex_str(source_code);
+    let lexems: Vec<Lexem> = lexer::lex_str(source_code, linked_libs);
     let mut data_ptr: usize = 0;
 
     for lexem in lexems {
@@ -65,14 +65,14 @@ pub fn compile_str_unoptimized(source_code: &str) -> String {
     output_string
 }
 
-pub fn compile_str_optimized(source_code: &str) -> String {
-    optimize_bf(&compile_str_unoptimized(source_code))
+pub fn compile_str_optimized(source_code: &str, linked_libs: Vec<&str>) -> String {
+    optimize_bf(&compile_str_unoptimized(source_code, linked_libs))
 }
 
-pub fn lex_str_to_string(source_code: &str) -> String {
+pub fn lex_str_to_string(source_code: &str, linked_libs: Vec<&str>) -> String {
     let mut output_string: String = String::new();
 
-    for lexem in lexer::lex_str(source_code) {
+    for lexem in lexer::lex_str(source_code, linked_libs) {
         output_string.push_str(format!("{:?}\n", lexem).as_str());
     }
 

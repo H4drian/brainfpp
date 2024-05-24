@@ -13,6 +13,35 @@ use clap::{App, Arg, ArgMatches, SubCommand};
 const VERSION: &str = "indev";
 
 pub fn get_matches() -> ArgMatches {
+    // arguments
+    let infile_arg: Arg = Arg::with_name("infile")
+        .value_name("INFILE")
+        .help("input file to compile")
+        .required(true)
+        .index(1);
+
+    let outfile_arg: Arg = Arg::new("outfile")
+        .short('o')
+        .long("outfile")
+        .value_name("OUTFILE")
+        .takes_value(true)
+        .help("the output file to write to");
+
+    let link_arg: Arg = Arg::new("link")
+        .short('l')
+        .long("link")
+        .takes_value(true)
+        .help("links a brainfpp file to the compiler")
+        .multiple(true)
+        .required(false);
+
+    let no_std_arg: Arg = Arg::new("no-std")
+        .long("no-std")
+        .takes_value(false)
+        .help("dissable default linking of brainfpp standard library")
+        .required(false);
+
+    // CLI app
     App::new("brainfpp")
         .version(VERSION)
         .author("Leon Cotten")
@@ -20,21 +49,10 @@ pub fn get_matches() -> ArgMatches {
         .subcommand(
             SubCommand::with_name("compile")
                 .about("compiles a brainfpp program to brainf")
-                .arg(
-                    Arg::with_name("infile")
-                        .value_name("INFILE")
-                        .help("input file to compile")
-                        .required(true)
-                        .index(1)
-                )
-                .arg(
-                    Arg::new("outfile")
-                        .short('o')
-                        .long("outfile")
-                        .value_name("OUTFILE")
-                        .takes_value(true)
-                        .help("the output file to write to")
-                )
+                .arg(infile_arg.clone())
+                .arg(outfile_arg.clone())
+                .arg(link_arg.clone())
+                .arg(no_std_arg.clone())
                 .arg(
                     Arg::new("release")
                         .short('r')
@@ -53,52 +71,15 @@ pub fn get_matches() -> ArgMatches {
         .subcommand(
             SubCommand::with_name("interpret")
                 .about("interprets a brainf program")
-                .arg(
-                    Arg::with_name("infile")
-                        .value_name("INFILE")
-                        .help("input file to compile")
-                        .required(true)
-                        .index(1)
-                )
+                .arg(infile_arg.clone())
         )
         .subcommand(
             SubCommand::with_name("lex")
                 .about("returns the lexems of a brainfpp program")
-                .arg(
-                    Arg::with_name("infile")
-                        .value_name("INFILE")
-                        .help("input file to compile")
-                        .required(true)
-                        .index(1)
-                )
-                .arg(
-                    Arg::new("outfile")
-                        .short('o')
-                        .long("outfile")
-                        .value_name("OUTFILE")
-                        .takes_value(true)
-                        .help("the output file to write to")
-                )
-        )
-        .subcommand(
-            SubCommand::with_name("debug")
-                .about("debugging tool for brainfpp. by default it will debug the entire program")
-                .arg(
-                    Arg::new("start")
-                        .short('s')
-                        .long("start")
-                        .value_name("START")
-                        .takes_value(true)
-                        .help("the line to start debugging at")
-                )
-                .arg(
-                    Arg::new("end")
-                        .short('e')
-                        .long("end")
-                        .value_name("END")
-                        .takes_value(true)
-                        .help("the line to end debugging at")
-                )
+                .arg(infile_arg.clone())
+                .arg(outfile_arg.clone())
+                .arg(link_arg.clone())
+                .arg(no_std_arg.clone())
         )
     .get_matches()
 }
