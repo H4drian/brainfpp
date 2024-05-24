@@ -60,7 +60,10 @@ fn main() {
         Some(("compile", compile_m)) => {
             let mut infile: String = String::new();
             let mut linked_libs: Vec<&str> = Vec::new();
-            
+
+            if !compile_m.is_present("no-std") {
+                linked_libs.push("STD");
+            } 
             if let Some(link_values) = compile_m.values_of("link") {
                 for val in link_values {
                     linked_libs.push(val);
@@ -102,6 +105,9 @@ fn main() {
         Some(("lex", lex_m)) => {
             let mut linked_libs: Vec<&str> = Vec::new();
 
+            if !lex_m.is_present("no-std") {
+                linked_libs.push("STD");
+            }
             if let Some(linked_value) = lex_m.values_of("link") {
                 for val in linked_value {
                     linked_libs.push(val);

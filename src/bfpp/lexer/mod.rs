@@ -40,28 +40,29 @@ pub fn lex_str(source_code: &str, linked_libs: Vec<&str>) -> Vec<Lexem> {
     let mut current_subroutine_code: Vec<Lexem> = Vec::new();
     let mut in_multiline_comment: bool = false;
 
-    let mut lines: Vec<&str> = Vec::new();
+    let mut lines: Vec<String> = Vec::new();
     
     for lib in linked_libs {
         if lib == "STD" {
             let std_code = include_str!("../std.bfpp");
             let std_lines: Vec<&str> = std_code.lines().collect();
             for std_line in std_lines {
-                lines.push(std_line);
+                lines.push(std_line.to_string());
             }
             continue;    
         }
 
-        let lib_path: String = lib.to_string();        
-        for lib_line in fs::read_to_string(lib_path).unwrap().lines() {
-            lines.push(lib_line);
+        let lib_path: String = lib.to_string();
+        let lib_content: String = fs::read_to_string(&lib_path)
+            .unwrap_or_else(|_| panic!("brainfpp: Error reading linked file {}", lib_path));
+        for lib_line in lib_content.lines() {
+            lines.push(lib_line.to_string());
         }
     }
 
     for line in source_code.lines() {
-        lines.push(line);
+        lines.push(line.to_string());
     }
-    println!("{:?}", lines);    
     let mut line_count: usize = 0;
 
     for line in lines {

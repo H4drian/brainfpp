@@ -35,6 +35,12 @@ pub fn get_matches() -> ArgMatches {
         .multiple(true)
         .required(false);
 
+    let no_std_arg: Arg = Arg::new("no-std")
+        .long("no-std")
+        .takes_value(false)
+        .help("dissable default linking of brainfpp standard library")
+        .required(false);
+
     // CLI app
     App::new("brainfpp")
         .version(VERSION)
@@ -45,6 +51,8 @@ pub fn get_matches() -> ArgMatches {
                 .about("compiles a brainfpp program to brainf")
                 .arg(infile_arg.clone())
                 .arg(outfile_arg.clone())
+                .arg(link_arg.clone())
+                .arg(no_std_arg.clone())
                 .arg(
                     Arg::new("release")
                         .short('r')
@@ -59,9 +67,6 @@ pub fn get_matches() -> ArgMatches {
                         .takes_value(false)
                         .help("builds the program in dev mode (unoptimized)")
                 )
-                .arg(
-                    link_arg.clone()
-                )
         )
         .subcommand(
             SubCommand::with_name("interpret")
@@ -74,6 +79,7 @@ pub fn get_matches() -> ArgMatches {
                 .arg(infile_arg.clone())
                 .arg(outfile_arg.clone())
                 .arg(link_arg.clone())
+                .arg(no_std_arg.clone())
         )
     .get_matches()
 }
