@@ -31,6 +31,7 @@ pub fn get_matches() -> ArgMatches {
         .short('l')
         .long("link")
         .takes_value(true)
+        .value_name("lib")
         .help("links a brainfpp file to the compiler")
         .multiple(true)
         .required(false);
