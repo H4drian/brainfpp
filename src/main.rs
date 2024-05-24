@@ -8,8 +8,6 @@
  */ 
 
 mod bfpp;
-use bfpp::debug;
-use bfpp::debug::print::print_all;
 
 use std::fs::{
     self,
@@ -61,7 +59,13 @@ fn main() {
     match matches.subcommand() {
         Some(("compile", compile_m)) => {
             let mut infile: String = String::new();
-
+            let mut linked_libs: Vec<&str> = Vec::new();
+            
+            if let Some(link_values) = compile_m.values_of("link") {
+                for val in link_values {
+                    linked_libs.push(val);
+                }
+            }
             if let Some(i) = compile_m.value_of("infile") {
                 infile = i.to_string();
             } 
@@ -70,10 +74,10 @@ fn main() {
                 let infile_content: String = read_input_file(infile);
 
                 if compile_m.is_present("release") {
-                    let bf_code: String = bfpp::compiler::compile_str_optimized(&infile_content);
+                    let bf_code: String = bfpp::compiler::compile_str_optimized(&infile_content, linked_libs);
                     write_output_file(outfile, bf_code);
                 } else {
-                    let bf_code: String = bfpp::compiler::compile_str_unoptimized(&infile_content);
+                    let bf_code: String = bfpp::compiler::compile_str_unoptimized(&infile_content, linked_libs);
                     write_output_file(outfile, bf_code);
                 }
             } else {
@@ -84,20 +88,28 @@ fn main() {
                     }
                 
                 if compile_m.is_present("release") {
-                    println!("{}", bfpp::compiler::compile_str_optimized(&infile_content));
+                    println!("{}", bfpp::compiler::compile_str_optimized(&infile_content, linked_libs));
                 } else {
-                    println!("{}", bfpp::compiler::compile_str_unoptimized(&infile_content));
+                    println!("{}", bfpp::compiler::compile_str_unoptimized(&infile_content, linked_libs));
                 }
             }
         }
         Some(("interpret", interpret_m)) => {
             if let Some(infile) = interpret_m.value_of("infile") {
-                bfpp::interpreter::interpret_str(&read_input_file(infile.to_string()));
+            bfpp::interpreter::interpret_str(&read_input_file(infile.to_string()));
             }
         }
         Some(("lex", lex_m)) => {
+            let mut linked_libs: Vec<&str> = Vec::new();
+
+            if let Some(linked_value) = lex_m.values_of("link") {
+                for val in linked_value {
+                    linked_libs.push(val);
+                }
+            }
+            
             if let Some(infile) = lex_m.value_of("infile") {
-                let lexems: String = bfpp::compiler::lex_str_to_string(&read_input_file(infile.to_string()));
+                let lexems: String = bfpp::compiler::lex_str_to_string(&read_input_file(infile.to_string()), linked_libs);
 
                 if let Some(outfile) = lex_m.value_of("outfile") {
                     write_output_file(outfile.to_string(), lexems);

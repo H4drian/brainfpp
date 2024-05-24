@@ -10,6 +10,8 @@
 pub mod lexem;
 use lexem::*;
 
+use std::fs;
+
 trait StartsWith {
     fn starts_with(&self, other: &str) -> bool;
 }
@@ -30,15 +32,36 @@ impl IsWhitespace for String {
     }
 }
 
-pub fn lex_str(source_code: &str) -> Vec<Lexem> {
+pub fn lex_str(source_code: &str, linked_libs: Vec<&str>) -> Vec<Lexem> {
     let mut lexem_vec: Vec<Lexem> = Vec::new();
     let mut subroutine_vec: Vec<Subroutine> = Vec::new();
     let mut in_subroutine_definition = false;
     let mut current_subroutine_name = String::new();
     let mut current_subroutine_code: Vec<Lexem> = Vec::new();
     let mut in_multiline_comment: bool = false;
+
+    let mut lines: Vec<&str> = Vec::new();
     
-    let lines: Vec<&str> = source_code.lines().collect();
+    for lib in linked_libs {
+        if lib == "STD" {
+            let std_code = include_str!("../std.bfpp");
+            let std_lines: Vec<&str> = std_code.lines().collect();
+            for std_line in std_lines {
+                lines.push(std_line);
+            }
+            continue;    
+        }
+
+        let lib_path: String = lib.to_string();        
+        for lib_line in fs::read_to_string(lib_path).unwrap().lines() {
+            lines.push(lib_line);
+        }
+    }
+
+    for line in source_code.lines() {
+        lines.push(line);
+    }
+    println!("{:?}", lines);    
     let mut line_count: usize = 0;
 
     for line in lines {

@@ -27,6 +27,14 @@ pub fn get_matches() -> ArgMatches {
         .takes_value(true)
         .help("the output file to write to");
 
+    let link_arg: Arg = Arg::new("link")
+        .short('l')
+        .long("link")
+        .takes_value(true)
+        .help("links a brainfpp file to the compiler")
+        .multiple(true)
+        .required(false);
+
     // CLI app
     App::new("brainfpp")
         .version(VERSION)
@@ -51,6 +59,9 @@ pub fn get_matches() -> ArgMatches {
                         .takes_value(false)
                         .help("builds the program in dev mode (unoptimized)")
                 )
+                .arg(
+                    link_arg.clone()
+                )
         )
         .subcommand(
             SubCommand::with_name("interpret")
@@ -62,6 +73,7 @@ pub fn get_matches() -> ArgMatches {
                 .about("returns the lexems of a brainfpp program")
                 .arg(infile_arg.clone())
                 .arg(outfile_arg.clone())
+                .arg(link_arg.clone())
         )
     .get_matches()
 }

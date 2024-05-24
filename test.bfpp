@@ -1,0 +1,4 @@
+def my_func
+    ldc 48
+    out
+edef 
