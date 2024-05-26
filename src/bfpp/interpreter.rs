@@ -7,7 +7,6 @@
  * See LICENSE for more information.
  */ 
 
-// bfpp built-in brainfuck interpreter
 
 pub fn interpret_str(code: &str) -> () { 
     let code_chars: Vec<char> = code.chars().collect();
