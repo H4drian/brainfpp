@@ -7,6 +7,8 @@
  * See LICENSE for more information.
  */ 
 
+use crate::bfpp::utils::BaseTrait;
+ 
 #[derive(Debug, Clone)]
 pub enum Token {
     Sdp,        // set data pointer
@@ -54,31 +56,37 @@ pub struct Lexem {
     pub line: usize
 }
 
-pub struct Subroutine {
-    pub name: String,
-    pub code: Vec<Lexem>
-}
-
-#[allow(dead_code)]
-pub trait New {
-    fn new() -> Self;
-}
-
-impl New for Lexem {
+impl BaseTrait for Lexem {
     fn new() -> Lexem {
         Lexem {
             token: Token::Noop,
             arg: None,
             line: 0
-        } 
+        }
+    }
+
+    fn reset(&mut self) -> () {
+        self.token = Token::Noop;
+        self.arg = None;
+        self.line = 0;
     }
 }
 
-impl New for Subroutine {
+pub struct Subroutine {
+    pub name: String,
+    pub code: Vec<Lexem>
+}
+
+impl BaseTrait for Subroutine {
     fn new() -> Subroutine {
         Subroutine {
             name: String::new(),
-            code: Vec::new()
+            code: Vec::new(),
         }
+    }
+
+    fn reset(&mut self) -> () {
+        self.name = String::new();
+        self.code = Vec::new();
     }
 }
