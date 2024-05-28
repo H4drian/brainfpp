@@ -12,3 +12,7 @@ pub mod compiler;
 pub mod cli;
 pub mod lexer;
 mod utils;
+
+pub fn get_stdlib() -> String {
+    include_str!("std.bfpp").to_string()
+}
