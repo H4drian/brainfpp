@@ -53,6 +53,16 @@ fn read_input_file(filepath: String) -> String {
     }
 }
 
+fn lex_str_to_string(source_code: &str, linked_libs: Vec<&str>) -> String {
+    let mut output_string: String = String::new();
+
+    for lexem in bfpp::lexer::lex_str(source_code, linked_libs) {
+        output_string.push_str(format!("{:?}\n", lexem).as_str());
+    }
+
+    output_string
+}
+
 fn main() {
     let matches: ArgMatches = bfpp::cli::get_matches();
 
@@ -115,7 +125,7 @@ fn main() {
             }
             
             if let Some(infile) = lex_m.value_of("infile") {
-                let lexems: String = bfpp::compiler::lex_str_to_string(&read_input_file(infile.to_string()), linked_libs);
+                let lexems: String = lex_str_to_string(&read_input_file(infile.to_string()), linked_libs);
 
                 if let Some(outfile) = lex_m.value_of("outfile") {
                     write_output_file(outfile.to_string(), lexems);

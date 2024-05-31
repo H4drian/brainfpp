@@ -7,12 +7,8 @@
  * See LICENSE for more information.
  */ 
 
-pub mod interpreter;
-pub mod compiler;
-pub mod cli;
-pub mod lexer;
-mod utils;
-
-pub fn get_stdlib() -> String {
-    include_str!("std.bfpp").to_string()
+/// The universal trait implemented for every struct in the bfpp api.
+pub trait BaseTrait {
+    fn new() -> Self;
+    fn reset(&mut self) -> ();
 }
