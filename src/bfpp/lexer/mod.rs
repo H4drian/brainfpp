@@ -32,6 +32,7 @@ impl IsWhitespace for String {
     }
 }
 
+/// returns the lexems for a snippet of source code 
 pub fn lex_str(source_code: &str, linked_libs: Vec<&str>) -> Vec<Lexem> {
     let mut lexem_vec: Vec<Lexem> = Vec::new();
     let mut subroutine_vec: Vec<Subroutine> = Vec::new();

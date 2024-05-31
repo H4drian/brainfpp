@@ -16,6 +16,7 @@ use lexer::lexem::{
 mod optimizer;
 use optimizer::optimize_bf;
 
+/// Compiles a brainfpp program (as str) to brainfuck code (as String) without running compiler optimizations
 pub fn compile_str_unoptimized(source_code: &str, linked_libs: Vec<&str>) -> String {
     let mut output_string: String = String::new();
     let lexems: Vec<Lexem> = lexer::lex_str(source_code, linked_libs);
@@ -65,6 +66,7 @@ pub fn compile_str_unoptimized(source_code: &str, linked_libs: Vec<&str>) -> Str
     output_string
 }
 
+/// Compiles a brainfpp program (as str) to brainfuck code (as String) with compiler optimizations.
 pub fn compile_str_optimized(source_code: &str, linked_libs: Vec<&str>) -> String {
     optimize_bf(&compile_str_unoptimized(source_code, linked_libs))
 }

@@ -7,7 +7,6 @@
  * See LICENSE for more information.
  */ 
 
-/// # BaseTrait
 /// The universal trait implemented for every struct in the bfpp api.
 pub trait BaseTrait {
     fn new() -> Self;
