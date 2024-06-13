@@ -15,8 +15,6 @@ use clap::{
     SubCommand
 };
 
-mod synapse;
-
 const VERSION: &str = "indev";
 
 pub fn get_matches() -> ArgMatches {
@@ -48,6 +46,12 @@ pub fn get_matches() -> ArgMatches {
         .takes_value(false)
         .help("dissable default linking of brainfpp standard library")
         .required(false);
+
+    let neuron_name_arg: Arg = Arg::new("name")
+        .value_name("NAME")
+        .help("name of the neuron")
+        .required(true)
+        .index(1);
 
     // CLI app
     App::new("brainfpp")
@@ -90,7 +94,69 @@ pub fn get_matches() -> ArgMatches {
                 .arg(no_std_arg.clone())
         )
         .subcommand(
-            synapse::get_synapse_subcommand()
+            SubCommand::with_name("new")
+                .about("creates a new brainfpp project")
+                .arg(
+                    Arg::new("name")
+                        .value_name("NAME")
+                        .help("name of the new project")
+                        .required(true)
+                        .index(1)
+                )
         )
+        .subcommand(
+            SubCommand::with_name("add")
+                .about("adds a neuron to the synapse.toml file")
+                .arg(neuron_name_arg.clone())
+        )
+        .subcommand(
+            SubCommand::with_name("remove")
+                .about("removes a neuron from the synapse.toml file")
+                .arg(neuron_name_arg.clone())
+        )
+        .subcommand(
+            SubCommand::with_name("synapse-init")
+                .about("initializes a synapse.toml file")
+                .arg(
+                    Arg::new("name")
+                        .short('n')
+                        .long("name")
+                        .value_name("NAME")
+                        .takes_value(true)
+                        .help("the name of the project")
+                )
+                .arg(
+                    Arg::new("version")
+                        .short('v')
+                        .long("version")
+                        .value_name("VERSION")
+                        .takes_value(true)
+                        .help("the current version of the project")
+                )
+                .arg(
+                    Arg::new("description")
+                        .short('d')
+                        .long("description")
+                        .value_name("DESCRIPTION")
+                        .takes_value(true)
+                        .help("the description for the project")
+                )
+                .arg(
+                    Arg::new("license")
+                        .short('l')
+                        .long("license")
+                        .value_name("LICENSE")
+                        .takes_value(true)
+                        .help("the license for the project")
+                )
+                .arg(
+                    Arg::new("authors")
+                        .short('a')
+                        .long("authors")
+                        .value_name("AUTHORS")
+                        .takes_value(true)
+                        .help("the authors of the project")
+                )
+    )
     .get_matches()
 }

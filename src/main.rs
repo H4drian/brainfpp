@@ -134,9 +134,6 @@ fn main() {
                 }
             }
         }
-        Some(("synapse", synapse_m)) => {
-            
-        }
         None => {}
         _ => {}
     }
