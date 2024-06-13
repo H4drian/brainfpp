@@ -8,7 +8,14 @@
  */ 
 
 extern crate clap;
-use clap::{App, Arg, ArgMatches, SubCommand};
+use clap::{
+    App,
+    Arg,
+    ArgMatches, 
+    SubCommand
+};
+
+mod synapse;
 
 const VERSION: &str = "indev";
 
@@ -81,6 +88,9 @@ pub fn get_matches() -> ArgMatches {
                 .arg(outfile_arg.clone())
                 .arg(link_arg.clone())
                 .arg(no_std_arg.clone())
+        )
+        .subcommand(
+            synapse::get_synapse_subcommand()
         )
     .get_matches()
 }
