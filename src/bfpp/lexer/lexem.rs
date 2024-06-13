@@ -8,7 +8,8 @@
  */ 
 
 use crate::bfpp::utils::BaseTrait;
- 
+
+/// The token type for the lexer. Each possible instruction has a token.
 #[derive(Debug, Clone)]
 pub enum Token {
     Sdp,        // set data pointer
@@ -49,6 +50,7 @@ impl PartialEq for Token {
     }
 }
 
+/// The lexem type for the lexer. Each lexem holds an instruction token, argument, and line number.
 #[derive(Debug, Clone)]
 pub struct Lexem {
     pub token: Token,
@@ -72,6 +74,7 @@ impl BaseTrait for Lexem {
     }
 }
 
+/// The subroutine type for the lexer. Each subroutine holds a name and code.
 pub struct Subroutine {
     pub name: String,
     pub code: Vec<Lexem>
